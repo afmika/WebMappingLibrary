@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	 
+		<title>Carte</title> 
+		<link href="css/bootstrap.css" rel="stylesheet"> 
+		<style>
+			body {
+				background-color : black;
+			}
+			canvas {
+				border-radius : 12px;
+			}
+			.formulaire{
+				background-color : white;
+			}
+		</style>
+	</head> 
+	<body ng-app="mikaApp">
+
+		<!-- <div ng-controller="headController" ng-include="'pages/head.html'"></div> -->
+		<!-- <div ng-controller="headController" ng-include="'pages/head.html'"></div> -->
+
+		<div ng-controller="accueilController">
+			<center>
+				<!-- <button ng-click="zoom(1)" class="btn btn-default"> + </button> -->
+				<!-- <button ng-click="zoom(-1)" class="btn btn-default"> - </button> -->
+				<button ng-click="charger()" class="btn btn-default">CHARGER LA BASE DE DONNEE</button>
+				<button ng-click="afficherForm()" class="btn btn-default">FORM SELECT : {{ messageForm }}</button>
+				<button ng-click="enableDrawingMode()" class="btn btn-default">Mode dessin : {{ message }}</button>
+					
+					<br />
+				<canvas ng-show="montrer" id="canvas" ng-modal="" width="900" height="550" style="border: 2px Solid Black;">
+				</canvas>
+				
+				<div id="debug"></div>
+				
+				<div class="formulaire" ng-controller="formController" ng-show="showForms">
+					<div>
+						Attribut
+						<input type="text" ng-model="attribut" placeholder="proprio ou titre, nom,..."/>
+						Valeur
+						<input type="text" ng-model="valeur" placeholder="Valeur"/>
+						<button ng-click="selectByAttribValeur()" class="btn btn-success">Select</button>						
+						<button ng-click="selectVoisinage()" class="btn btn-primary">Select Vosin</button>						
+					</div>
+					<div>
+						Surface
+						<select ng-model="comparateur" ng-init="inf">
+							<option value="inf"> Inferieur </option>
+							<option value="sup"> Superieur </option>
+						</select>
+						Valeur
+						<input type="text" ng-model="valeur_surf" placeholder="Valeur"/>
+						m <sup>2</sup>
+						<button ng-click="selectSurface()" class="btn btn-success">Select surface</button>						
+					</div>
+					<div>
+						Prix
+						<select ng-model="comparateur_prix" ng-init="inf">
+							<option value="inf_prix"> Inferieur </option>
+							<option value="sup_prix"> Superieur </option>
+						</select>
+						Valeur
+						<input type="text" ng-model="valeur_prix" placeholder="Valeur"/>$
+						<button ng-click="selectPrix()" class="btn btn-success">Select prix</button>						
+					</div>
+						<br />
+						<b>Formulaire d'ajout {{fome_chosie}} ({{ message }})</b>
+					<div ng-show="mode_dessin">
+						<input type="text" ng-model="nom_insert" placeholder="Nom du polygone"/>
+						<input type="text" ng-model="proprio_insert" placeholder="Proprio / Titre"/>
+						<input type="text" ng-model="prix_insert" placeholder="Prix"/>
+						<button ng-click="insertVerticles()" class="btn btn-danger">Ajouter</button>						
+					</div>
+					<br />
+				</div>
+			</center>
+			
+		</div>
+		<script type="text/javascript" src="script/angular.min.js"></script>
+		<script type="text/javascript" src="script/angular-route.min.js"></script>
+		<script src="js/jquery.min.js"></script> 
+		<script src="js/bootstrap.min.js"></script> 
+
+		<script type="text/javascript" src="tools/Tools.js"></script>
+		<script type="text/javascript" src="tools/Vector.js"></script>
+		<script type="text/javascript" src="tools/Shape.js"></script>
+		<script type="text/javascript" src="tools/Layer.js"></script>
+		<script type="text/javascript" src="tools/LayerManager.js"></script>
+		<script type="text/javascript" src="engine.js"></script>
+
+		<script type="text/javascript" src="fonctions.js"></script>
+		<script type="text/javascript" src="app_init.js"></script>
+		<script type="text/javascript" src="services.js"></script>
+		<script type="text/javascript" src="index.js"></script>
+	</body>
+</html>
